@@ -11,6 +11,10 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
 	contacts.remove(model);
       });
 
+      contactsListView.on("childview:contact:show", function(childView, model){
+	ContactManager.ContactsApp.Show.Controller.showContact(model);
+      });
+
       ContactManager.mainRegion.show(contactsListView);
     }
   }
