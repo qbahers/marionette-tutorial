@@ -36,7 +36,7 @@ ContactManager.module("Entities", function(Entities, ContactManager, Backbone, M
 	return initializeContacts();
       }
       return contacts;
-    }
+    },
     
     getContactEntity: function(contactId){
       var contact = new Entities.Contact({id: contactId});
