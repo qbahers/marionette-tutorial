@@ -3,9 +3,17 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
     listContacts: function(){
       var fetchingContacts = ContactManager.request("contact:entities");
 
+      var contactsListLayoutView = new List.LayoutView();
+      var contactsListPanel = new List.Panel();
+
       $.when(fetchingContacts).done(function(contacts){
 	var contactsListView = new List.Contacts({
 	  collection: contacts
+	});
+
+	contactsListLayoutView.on("show", function(){
+	  contactsListLayoutView.panelRegion.show(contactsListPanel);
+	  contactsListLayoutView.contactsRegion.show(contactsListView);
 	});
 
 	contactsListView.on("childview:contact:show", function(childView, model){
@@ -36,7 +44,7 @@ ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbon
 	  model.destroy();
 	});
 
-	ContactManager.mainRegion.show(contactsListView);
+	ContactManager.mainRegion.show(contactsListLayoutView);
       });
     }
   }
